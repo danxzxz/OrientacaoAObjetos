@@ -7,44 +7,31 @@ class Retangulo
     public $base;
     public $altura;
 //constructor
-    function __construct(){
-        echo "\n" ."Objeto criado" . "\n";
+    function __construct($a, $b){
+        $this->altura = $a;
+        $this->base = $b;
 }
     //metodos
     function area()
     {
-        $area = $this->base * $this->altura;
-        echo "\nA area é de: $area" . "\n";
+        return $this->base * $this->altura;
     }
     function perimetro()
     {
-        $perimetro = ($this->base * 2) + ($this->altura * 2);
-        echo "Ja o perimetro é de: $perimetro" . "\n";
+        return ($this->base * 2) + ($this->altura * 2);
 
     }
 }
 //2- Criar o objeto a classe 
+for($i=0; $i<3; $i++){
+    $altura = readline("Informe a altura: ");
+    $abse = readline("Informe a base: ");
 
-//programa principal
-$retangulo1 = new Retangulo();
-$retangulo1 ->base =readline("\nQuanto mede a base do retangulo 1? ");
-$retangulo1 ->altura = readline("\nQual a altura do retangulo 1? \n");
-
-$retangulo2 = new Retangulo();
-$retangulo2 ->base =readline("\nQuanto mede a base do retangulo 2? ");
-$retangulo2 ->altura = readline("\nQual a altura do retangulo 2? \n");
-
-$retangulo3 = new Retangulo();
-$retangulo3 ->base =readline("\nQuanto mede a base do retangulo 3? ");
-$retangulo3 ->altura = readline("\nQual a altura do retangulo 3?\n ");
+    $ret = new Retangulo($altura, $base);
+    echo "Área do retangulo: " . $ret->area() . "\n";
+    echo "Perímetro do retangulo: " . $ret->perimetro() . "\n";
+}
 
 
 
-$retangulo1->area();
-$retangulo1->perimetro();
 
-$retangulo2->area();
-$retangulo2->perimetro();
-
-$retangulo3->area();
-$retangulo3->perimetro();
