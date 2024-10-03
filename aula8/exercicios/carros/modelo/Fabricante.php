@@ -1,16 +1,16 @@
 <?php
 
-class Fabricante
-{
-
+class Fabricante {
     private string $nome;
     private string $sigla;
-    
-    public function __construct($nome, $sigla)
-    {
-        $this->nome;
-        $this->sigla;
 
+    public function __construct($nome, $sigla) {
+        $this->nome = $nome;
+        $this->sigla = $sigla;        
+    }
+
+    public function __toString() {
+        return $this->sigla . " - " . $this->nome;
     }
 
     /**
