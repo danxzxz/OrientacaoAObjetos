@@ -1,13 +1,13 @@
 <?php
-require_once("Fabricante.php");
-class Carro
-{
 
+require_once("Fabricante.php");
+
+class Carro {
     private string $modelo;
     private int $anoFabricacao;
+    private Fabricante $fabricante;
 
-    private Fabricante $fab;
-
+    
 
     /**
      * Get the value of modelo
@@ -46,19 +46,19 @@ class Carro
     }
 
     /**
-     * Get the value of fab
+     * Get the value of fabricante
      */
-    public function getFab(): Fabricante
+    public function getFabricante(): Fabricante
     {
-        return $this->fab;
+        return $this->fabricante;
     }
 
     /**
-     * Set the value of fab
+     * Set the value of fabricante
      */
-    public function setFab(Fabricante $fab): self
+    public function setFabricante(Fabricante $fabricante): self
     {
-        $this->fab = $fab;
+        $this->fabricante = $fabricante;
 
         return $this;
     }
