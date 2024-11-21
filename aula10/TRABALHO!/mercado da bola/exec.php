@@ -4,12 +4,15 @@ require_once('modelo/Defensor.php');
 require_once('modelo/MeioCampo.php');
 require_once('modelo/Goleiro.php');
 require_once('modelo/Jogador.php');
+// ARRAYS
 $atacante = array();
 $goleiro = array();
 $defensor = array();
 $meiocampo = array();
-
 $carrinho = array();
+
+
+//FUNÇÕES
 function listarCarrinho(array $carrinho) {
     echo "\n\n====JOGADORES NO CARRINHO====\n";
 
@@ -40,6 +43,7 @@ function listarCarrinho(array $carrinho) {
         echo "Carrinho vazio.\n";
     }
 }
+
 function listarGoleiro(array $goleiro) {
     echo "\n\n====JOGADORES DISPONÍVEIS====\n";
           
@@ -47,7 +51,7 @@ function listarGoleiro(array $goleiro) {
     echo "\n-------";
     foreach($goleiro as $j) {
         if($j instanceof Goleiro){
-        echo $i . "- " . $j->getDadosGoleiro(); 
+        echo "\n==>" . $i .  $j->getDadosGoleiro(); 
         $i++;
     }
 }
@@ -60,7 +64,7 @@ function listarMeioCampo(array $meiocampo) {
     echo "\n-------";
     foreach($meiocampo as $j) {
         if($j instanceof MeioCampo){
-        echo $i . "- " . $j->getDadosMeioCampo(); 
+        echo "\n==>" . $i . $j->getDadosMeioCampo(); 
         $i++;
     }
 }
@@ -73,7 +77,7 @@ function listarAtacante(array $atacante) {
     echo "\n-------";
     foreach($atacante as $j) {
         if($j instanceof Atacante){
-        echo $i . "- " . $j->getDadosAtacante(); 
+        echo "\n==>" . $i . $j->getDadosAtacante(); 
         $i++;
     }
 }
@@ -86,11 +90,15 @@ function listarDefensor(array $defensor) {
     echo "\n-------";
     foreach($defensor as $j) {
         if($j instanceof Defensor){
-        echo $i . "- " . $j->getDadosDefensor(); 
+        echo "\n==>" . $i . $j->getDadosDefensor(); 
         $i++;
     }
 }
 }
+
+
+//-----JOGADORES
+
 //MEIO CAMPO
 $m1 = new MeioCampo("Kevin De Bruyne", 33, "MEI", "Belga", 67, 87, 91, 223000000, "Lançamento em profundidade, Visão de jogo", 92, 94, 97);
 array_push($meiocampo, $m1);
@@ -100,7 +108,7 @@ $m3 = new MeioCampo("Joshua Kimmich", 29, "VOL", "Alemão", 86, 78, 92, 38000000
 array_push($meiocampo, $m3);
 $m4 = new MeioCampo("Toni Kross", 34, "MC", "Alemão", 67, 89, 95, 430000000, "Lançamento em profundidade, Bola parada, Chute de média e longa distância", 97, 98, 99);
 array_push($meiocampo, $m4);
-$m5 = new MeioCampo("JUde Bellingham", 21, "MC", "Inglês", 89, 89, 96, 1000000000, "Força, Jogo Aéreo, Lançamento, Chute de fora da área", 90, 92, 93);
+$m5 = new MeioCampo("Jude Bellingham", 21, "MC", "Inglês", 89, 89, 96, 1000000000, "Força, Jogo Aéreo, Lançamento, Chute de fora da área", 90, 92, 93);
 array_push($meiocampo, $m5);
 
 
@@ -115,8 +123,9 @@ $a4 = new Atacante("Lautaro Martínez", 27, "CA/ATA", "Argentino", 84, 89, 89, 7
 array_push($atacante, $a4);
 $a5 = new Atacante("Vinicius Junior", 24, "PE/ATA", "Brasileiro", 95, 89, 90, 1000000000, "Velocidade, Dribles, Chute, Genialidade absurda", 96);
 array_push($atacante, $a5);
-//DEFENSOR idade pos nacionalidade overall velocidade chute multa qualidade Desarme Fisico JogoAereo
- 
+
+
+//DEFENSOR 
 $d1 = new Defensor("Rúben Dias", 27, "ZAG", "Português", 67, 40, 89, 100000000, "Força física, Jogo aéreo, Desarme, Visão de jogo, Quebra de linha", 89, 88, 90);
 array_push($defensor, $d1);
 $d2 = new Defensor("Virgil van Dijk", 33, "ZAG", "Holândes", 89, 78, 61, 230000000, "Disciplina, Liderança, Força, Jogo aéreo, Posicionamento, Grande senso de cobertura", 89, 89, 92);
@@ -130,7 +139,6 @@ array_push($defensor, $d5);
 
 
 //GOLEIRO
-
 $g1 = new Goleiro("Alisson", 32, "GK", "Brasileiro", 89, 85, 85, 90000000, "", 90);
 array_push($goleiro, $g1);
 $g2 = new Goleiro("Courtois", 32, "GK", "Belga", 88, 85, 78, 100000000, "", 88);
@@ -184,17 +192,21 @@ do {
                 switch ($opcao2) {
                     case 1:
                         listarAtacante($atacante);
-                        echo "\n";
+                        echo "========================\nCaso não tenha interesse em nenhum jogador -  PRESS 0\n========================\n";
                         $idx = readline("Informe o atacante que você deseja comprar: ");
                         if($idx > 0 && $idx <= count($atacante)) {
                             $c = $atacante[$idx - 1]; // Get the selected player
                             array_push($carrinho, $c);
                             array_splice($atacante, $idx - 1, 1);
-                        echo "\nA proposta de compra foi enviada ao empresário do jogador com sucesso!\nAguarde respostas.";}
+                        echo "\nA proposta de compra foi enviada ao empresário do jogador com sucesso!\nAguarde respostas.";
+                    } elseif ($idx == 0) {
+                        break;
+                     }else
+                     echo "Índice inválido.\n";
                         break;
                         case 2:
                             listarMeioCampo($meiocampo);
-                            echo "\n";
+                            echo "========================\nCaso não tenha interesse em nenhum jogador -  PRESS 0\n========================\n";
                             $idx = readline("Informe o meio-campo que você deseja comprar: ");
                             if($idx > 0 && $idx <= count($meiocampo)) {
                                 $c = $meiocampo[$idx - 1]; // Get the selected player
@@ -202,35 +214,39 @@ do {
                                 array_splice($meiocampo, $idx - 1, 1); // Remove from available list
                                 echo "\nA proposta de compra foi enviada ao empresário do jogador com sucesso!\nAguarde respostas.";
                             }
-                            else
-                                echo "Índice informado é inválido.\n";
+                            elseif ($idx == 0) {
+                                break;
+                             }else
+                             echo "Índice inválido.\n";
                             break;
                         
                         case 3:
                             listarDefensor($defensor);
-                            echo "\n";
+                            echo "========================\nCaso não tenha interesse em nenhum jogador -  PRESS 0\n========================\n";
                             $idx = readline("Informe o defensor que você deseja comprar: ");
                             if($idx > 0 && $idx <= count($defensor)) {
                                 $c = $defensor[$idx - 1]; // Get the selected player
                                 array_push($carrinho, $c);
                                 array_splice($defensor, $idx - 1, 1); // Remove from available list
                                 echo "\nA proposta de compra foi enviada ao empresário do jogador com sucesso!\nAguarde respostas.";
-                            } else {
-                                echo "Índice inválido.\n";
-                            }
-                        
+                            } elseif ($idx == 0) {
+                               break;
+                            }else
+                            echo "Índice inválido.\n";
+                            break;
                         case 4:
                             listarGoleiro($goleiro);
-                            echo "\n";
+                            echo "========================\nCaso não tenha interesse em nenhum jogador -  PRESS 0\n========================\n";
                             $idx = readline("Informe o goleiro que você deseja comprar: ");
                             if($idx > 0 && $idx <= count($goleiro)) {
                                 $c = $goleiro[$idx - 1]; // Get the selected player
                                 array_push($carrinho, $c);
                                 array_splice($goleiro, $idx - 1, 1); // Remove from available list
                                 echo "\nA proposta de compra foi enviada ao empresário do jogador com sucesso!\nAguarde respostas.";
-                            } else {
-                                echo "Índice inválido.\n";
-                            }
+                            } elseif ($idx == 0) {
+                                break;
+                             }else
+                             echo "Índice inválido.\n";
                             break;
                         
                  }
@@ -266,7 +282,7 @@ do {
                         $ata = new Atacante($nome, $idade, $posicao, $nacionalidade, $nivelVelocidade, $nivelChute, $overall, $multa, $principalQualidade, $nivelDrible);
                             array_push($atacante, $ata);
                 
-                        echo "\n\nJogador cadastrado com sucesso!";
+                        echo "========================\nJOGADOR CADASTRADO COM SUCESSO\n========================\n";
 
                         break;
                         case 2:
@@ -288,7 +304,7 @@ do {
 
                                 array_push($meiocampo, $mc);
                     
-                            echo "Jogador cadastrado com sucesso!";
+                                echo "========================\nJOGADOR CADASTRADO COM SUCESSO\n========================\n";
 
                             break;
                         
@@ -310,7 +326,7 @@ do {
                         $def = new Defensor($nome, $idade, $posicao, $nacionalidade, $nivelVelocidade, $nivelChute, $overall, $multa, $principalQualidade, $nivelDesarme, $nivelFisico, $nivelJogoAereo);
                                array_push($defensor, $def);
                    
-                           echo "Jogador cadastrado com sucesso!";
+                               echo "========================\nJOGADOR CADASTRADO COM SUCESSO\n========================\n";
    
                             break;
                         
@@ -330,14 +346,14 @@ do {
                             
                                 array_push($goleiro, $gol);
                     
-                            echo "Jogador cadastrado com sucesso!";
+                                echo "========================\nJOGADOR CADASTRADO COM SUCESSO\n========================\n";
     
                             break;
                         
                  }
             }while ($opcao3 < 0);
             
-
+            break;
            
     
         case 3:
