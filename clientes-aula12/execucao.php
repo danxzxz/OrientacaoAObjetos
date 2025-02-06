@@ -64,30 +64,36 @@ do {
             break;
 
         case 4:
-            // Buscar clientes pelo nome
-            // $nome = readline("Informe o nome do cliente que deseja buscar: ");
-            // $clienteDAO = new ClienteDAO();
-            // $cliente = $clienteDAO->buscarClientePorNome($nome);
+            // Buscar clientes pelo id
+             $id = readline("Informe o id do cliente que deseja buscar: ");
+             $clienteDAO = new ClienteDAO();
+             $cliente = $clienteDAO->buscarPorID($id);
 
-            // if ($cliente) {
-            //     print_r($cliente);
-            // } else {
-            //     echo "Cliente não encontrado!\n";
-            // }
-            // break;
+             if ($cliente != null) {
+                 echo $cliente;
+             } else {
+                 echo "Cliente não encontrado!\n";
+             }
+             break;
 
         case 5:
             // Excluir cliente
-            // $id = readline("Informe o ID do cliente que deseja excluir: ");
-            // $clienteDAO = new ClienteDAO();
-            // $resultado = $clienteDAO->excluirCliente($id);
+            $clienteDAO = new ClienteDAO();
+            $clientes = $clienteDAO->listarClientes();
+            foreach($clientes as $c)
+            echo $c;
+             $id = readline("Informe o ID do cliente que deseja excluir: ");
 
-            // if ($resultado) {
-            //     echo "Cliente excluído com sucesso!\n";
-            // } else {
-            //     echo "Erro ao excluir cliente!\n";
-            // }
-            // break;
+
+             $cliente = $clienteDAO->buscarPorID($id);
+             //if ($cliente != null  ) ==   
+             if ($cliente) { 
+                $resultado = $clienteDAO->excluirCliente($id);
+                 echo "Cliente excluído com sucesso!\n";
+             } else {
+                echo "Erro ao excluir cliente!\n";
+             }
+             break;
 
         case 0:
             echo "\nPrograma encerrado!!\n";

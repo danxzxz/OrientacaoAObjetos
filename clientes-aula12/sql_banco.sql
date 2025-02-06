@@ -11,3 +11,5 @@ CREATE TABLE clientes (
     cnpj varchar(30),
     PRIMARY KEY (id)   
 );
+
+ALTER TABLE clientes MODIFY nome VARCHAR(70);
